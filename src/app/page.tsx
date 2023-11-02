@@ -18,13 +18,50 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="h-screen grid grid-flow-col grid-cols-4">
-      <div className="bg-pink-900 w-full h-full col-span-1">
-        <div className=""> 
-
+    <main className="h-screen flex flex-col">
+      <div className="h-20">asdsd</div>
+      <div className="flex h-full w-full">
+        <div className="bg-zinc-900 h-full w-96 p-4">
+          <ContactItem />
         </div>
+        <div></div>
       </div>
-      <div className="bg-orange-900 w-full h-full col-span-3"></div>
     </main>
   );
 }
+
+const ContactItem = () => {
+  const [avatar, setAvatar] = useState("");
+  const setContactAvatar = async () => {
+    fetch("https://randomuser.me/api/")
+      .then((response) => response.json())
+      .then((data) => {
+        const user = data.results[0];
+        const imageUrl = user.picture.large;
+        setAvatar(imageUrl);
+      })
+      .catch((error) => {
+        console.error("Error fetching random user image", error);
+      });
+  };
+
+  useEffect(() => {
+    setContactAvatar();
+  }, []);
+
+  return (
+    <div className="bg-red-950 p-4 flex">
+      {avatar === "" ? (
+        <div>loading.. </div>
+      ) : (
+        <Image
+          src={avatar}
+          alt="avatar"
+          width={500}
+          height={500}
+          className="object-cover h-12 w-12 rounded-full"
+        />
+      )}
+    </div>
+  );
+};
