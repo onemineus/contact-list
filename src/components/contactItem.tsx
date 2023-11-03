@@ -27,6 +27,9 @@ const ContactItem = ({
         const user = data.results[0];
         const imageUrl = user.picture.large;
         setAvatar(imageUrl);
+        if (cliUser === index) {
+          setCliAvatar(avatar);
+        }
       })
       .catch((error) => {
         console.error("Error fetching random user image", error);
@@ -67,6 +70,7 @@ const ContactItem = ({
               "https://www.testhouse.net/wp-content/uploads/2021/11/default-avatar.jpg"
             }
             alt="avatar"
+            priority
             width={500}
             height={500}
             className="h-12 w-12 rounded-full object-cover"
@@ -75,6 +79,7 @@ const ContactItem = ({
           <Image
             src={avatar}
             alt="avatar"
+            priority
             width={100}
             height={100}
             className="h-12 w-12 rounded-full object-cover"
