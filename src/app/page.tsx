@@ -43,7 +43,7 @@ export default async function Home() {
             {/* <div className="w-min px-4 py-2 bg-stone-800 rounded-xl text-center">Search</div> */}
           </div>
           {data.map((user, index) => {
-            return <ContactItem index={index} contact={user} />;
+            return <ContactItem key={index} index={index} contact={user} />;
           })}
         </div>
         {/* right side */}
