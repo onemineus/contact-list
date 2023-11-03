@@ -4,9 +4,15 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { TbClick } from "react-icons/tb";
 import { FiGithub } from "react-icons/fi";
+import { useAtom } from "jotai";
+import { currentAvatar } from "@/jotai/atoms";
+import { motion } from "framer-motion";
 
 const ContactItem = ({ key, name }: { key: number; name: string }) => {
+  console.log(name)
   const [avatar, setAvatar] = useState("");
+  const [curAv, setCurAv] = useAtom(currentAvatar);
+  const [isClicked, setIsClicked] = useState(false);
   const setContactAvatar = async () => {
     fetch("https://randomuser.me/api/")
       .then((response) => response.json())
@@ -14,6 +20,7 @@ const ContactItem = ({ key, name }: { key: number; name: string }) => {
         const user = data.results[0];
         const imageUrl = user.picture.large;
         setAvatar(imageUrl);
+        setCurAv(imageUrl);
       })
       .catch((error) => {
         console.error("Error fetching random user image", error);
@@ -25,9 +32,15 @@ const ContactItem = ({ key, name }: { key: number; name: string }) => {
   }, []);
 
   return (
-    <div
+    <motion.div
+      animate={{
+        backgroundColor: isClicked ? "#fff" : "#FACC15",
+      }}
+      onClick={() => {
+        setIsClicked(!isClicked);
+      }}
       key={key}
-      className="bg-yellow-400 cursor-pointer rounded-2xl p-4 flex items-center justify-between"
+      className="flex cursor-pointer items-center justify-between rounded-2xl p-4"
     >
       <div className="flex items-center space-x-4">
         {avatar === "" ? (
@@ -38,7 +51,7 @@ const ContactItem = ({ key, name }: { key: number; name: string }) => {
             alt="avatar"
             width={500}
             height={500}
-            className="object-cover h-12 w-12 rounded-full"
+            className="h-12 w-12 rounded-full object-cover"
           />
         ) : (
           <Image
@@ -46,7 +59,7 @@ const ContactItem = ({ key, name }: { key: number; name: string }) => {
             alt="avatar"
             width={100}
             height={100}
-            className="object-cover h-12 w-12 rounded-full"
+            className="h-12 w-12 rounded-full object-cover"
           />
         )}
         <div>{name}</div>
@@ -54,7 +67,7 @@ const ContactItem = ({ key, name }: { key: number; name: string }) => {
       <div>
         <TbClick size={30} />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

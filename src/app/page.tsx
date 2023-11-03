@@ -1,10 +1,13 @@
 import { FiGithub } from "react-icons/fi";
 import ContactItem from "@/components/contactItem";
 import { ContactList } from "@/types/contacts";
+import Image from "next/image";
 
 export const getUsersData = async () => {
   //simulating a real world fetch request from DB
-  const response = await fetch("http://127.0.0.1:3000/api/users");
+  const response = await fetch("http://127.0.0.1:3000/api/users", {
+    cache: "no-cache",
+  });
   const data: ContactList = await response.json();
   return data;
 };
@@ -37,13 +40,14 @@ export default async function Home() {
             />
             {/* <div className="w-min px-4 py-2 bg-stone-800 rounded-xl text-center">Search</div> */}
           </div>
-          {data.map((user, index: number) => {
-            return <ContactItem key={index} name={user["Display Name"]} />;
+          {data.map((user, index) => {
+            console.log(index);
+            return <ContactItem key={1} name={user["Display Name"]} />;
           })}
         </div>
         {/* right side */}
-        <div className="sticky top-20 overflow-y-auto h-screen w-full bg-stone-200 p-4 pb-24 text-stone-950">
-          <div className="h-[2000px]">asdasda</div>
+        <div className="sticky top-20 h-screen w-full overflow-y-auto bg-stone-200 p-4 pb-24 text-stone-950">
+          <div>{/* <Image src={""} /> */}</div>
         </div>
       </div>
     </main>
