@@ -5,14 +5,21 @@ import { useEffect, useState } from "react";
 import { TbClick } from "react-icons/tb";
 import { FiGithub } from "react-icons/fi";
 import { useAtom } from "jotai";
-import { currentAvatar } from "@/jotai/atoms";
+import { clickedAvatar, clickedContact, clickedUserIndex } from "@/jotai/atoms";
 import { motion } from "framer-motion";
+import { Contact } from "@/types/contacts";
 
-const ContactItem = ({ key, name }: { key: number; name: string }) => {
-  console.log(name)
+const ContactItem = ({
+  index,
+  contact,
+}: {
+  index: number;
+  contact: Contact;
+}) => {
   const [avatar, setAvatar] = useState("");
-  const [curAv, setCurAv] = useAtom(currentAvatar);
-  const [isClicked, setIsClicked] = useState(false);
+  const [_, setCliAvatar] = useAtom(clickedAvatar);
+  const [cliUser, setCliUser] = useAtom(clickedUserIndex);
+  const [__, setCliContact] = useAtom(clickedContact);
   const setContactAvatar = async () => {
     fetch("https://randomuser.me/api/")
       .then((response) => response.json())
@@ -20,7 +27,6 @@ const ContactItem = ({ key, name }: { key: number; name: string }) => {
         const user = data.results[0];
         const imageUrl = user.picture.large;
         setAvatar(imageUrl);
-        setCurAv(imageUrl);
       })
       .catch((error) => {
         console.error("Error fetching random user image", error);
@@ -31,15 +37,27 @@ const ContactItem = ({ key, name }: { key: number; name: string }) => {
     setContactAvatar();
   }, []);
 
+  useEffect(() => {}, []);
+
   return (
     <motion.div
+      style={{}}
       animate={{
-        backgroundColor: isClicked ? "#fff" : "#FACC15",
+        backgroundColor: cliUser === index ? "#F5F5F4" : "#FACC15",
+        color: cliUser === index ? "#0C0A09" : "#F5F5F4",
+        outlineStyle: cliUser === index ? "solid" : "none",
+        outlineWidth: cliUser === index ? "1px" : "0px",
+        outlineColor: "#facc15",
+      }}
+      transition={{
+        duration: 0.6,
       }}
       onClick={() => {
-        setIsClicked(!isClicked);
+        setCliUser(index);
+        setCliAvatar(avatar);
+        setCliContact(contact);
       }}
-      key={key}
+      key={index}
       className="flex cursor-pointer items-center justify-between rounded-2xl p-4"
     >
       <div className="flex items-center space-x-4">
@@ -62,7 +80,7 @@ const ContactItem = ({ key, name }: { key: number; name: string }) => {
             className="h-12 w-12 rounded-full object-cover"
           />
         )}
-        <div>{name}</div>
+        <div>{contact["Display Name"]}</div>
       </div>
       <div>
         <TbClick size={30} />
