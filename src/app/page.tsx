@@ -9,7 +9,7 @@ import { FiGithub } from "react-icons/fi";
 export default function Home() {
   const [data, setData] = useState<ContactList>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [currentAvatar, setCurrentAvatar] = useState("")
+  const [currentAvatar, setCurrentAvatar] = useState("");
   const setContactsData = async () => {
     setIsLoading(true);
     const data = await getUsersData();
@@ -49,7 +49,7 @@ export default function Home() {
               {/* <div className="w-min px-4 py-2 bg-stone-800 rounded-xl text-center">Search</div> */}
             </div>
             {data.map((user, index) => {
-              return <ContactItem />;
+              return <ContactItem key={index} />;
             })}
           </div>
           {/* right side */}
@@ -64,7 +64,7 @@ export default function Home() {
   );
 }
 
-const ContactItem = () => {
+const ContactItem = ({ key }: { key: number }) => {
   const [avatar, setAvatar] = useState("");
   const setContactAvatar = async () => {
     fetch("https://randomuser.me/api/")
@@ -84,7 +84,10 @@ const ContactItem = () => {
   }, []);
 
   return (
-    <div className="bg-stone-800 cursor-pointer rounded-2xl p-4 flex items-center justify-between">
+    <div
+      key={}
+      className="bg-stone-800 cursor-pointer rounded-2xl p-4 flex items-center justify-between"
+    >
       <div className="flex items-center space-x-4">
         {avatar === "" ? (
           <Image
