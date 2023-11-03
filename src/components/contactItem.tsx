@@ -27,7 +27,7 @@ const ContactItem = ({ key, name }: { key: number; name: string }) => {
   return (
     <div
       key={key}
-      className="bg-stone-800 cursor-pointer rounded-2xl p-4 flex items-center justify-between"
+      className="bg-yellow-400 cursor-pointer rounded-2xl p-4 flex items-center justify-between"
     >
       <div className="flex items-center space-x-4">
         {avatar === "" ? (

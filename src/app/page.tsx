@@ -13,25 +13,27 @@ export default async function Home() {
   const data = await getUsersData();
 
   return (
-    <main className="relative flex flex-col">
+    <main className="relative flex min-h-screen flex-col">
       {/* navbar */}
-      <div className="h-20 sticky top-0 shrink-0 w-full bg-stone-800 px-4 flex justify-between items-center">
-        <div className="text-2xl">Contacts Page</div>
+      <div className="sticky top-0 z-10 flex h-20 w-full shrink-0 items-center justify-between bg-yellow-400 px-4">
+        <div className="text-2xl font-bold text-stone-950">Contacts Page</div>
         <div>
           <FiGithub size={30} />
         </div>
       </div>
 
-      <div className="flex w-full h-full">
+      <div className="relative flex w-full">
         {/* left side */}
-        <div className="bg-stone-900 shrink-0 space-y-4 h-full w-96 p-4">
+        <div className="w-96 shrink-0 space-y-4 bg-stone-100 p-4">
           <div className="flex flex-col space-y-2">
-            <div className="capitalize text-xl">search contacts</div>
+            <div className="text-xl capitalize text-stone-950">
+              search contacts
+            </div>
             <input
               type="text"
               name="contact"
               placeholder="Search for anything"
-              className="rounded-xl placeholder:text-sm focus:outline-none text-stone-950 px-3 bg-stone-200 h-10 w-full"
+              className="h-10 w-full rounded-xl bg-stone-200 px-3 text-stone-950 placeholder:text-sm focus:outline-none"
             />
             {/* <div className="w-min px-4 py-2 bg-stone-800 rounded-xl text-center">Search</div> */}
           </div>
@@ -40,10 +42,8 @@ export default async function Home() {
           })}
         </div>
         {/* right side */}
-        <div className="bg-stone-950 items-center p-4 left-96 right-0 flex justify-center fixed top-20 bottom-0">
-          <div className="bg-stone-900 rounded-xl w-full h-full p-4">
-            <div className="h-[1200px]">asdasda</div>
-          </div>
+        <div className="sticky top-20 overflow-y-auto h-screen w-full bg-stone-200 p-4 pb-24 text-stone-950">
+          <div className="h-[2000px]">asdasda</div>
         </div>
       </div>
     </main>
