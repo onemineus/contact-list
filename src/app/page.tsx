@@ -3,7 +3,7 @@ import ContactItem from "@/components/contactItem";
 import { ContactList } from "@/types/contacts";
 import Image from "next/image";
 
-export const getUsersData = async () => {
+ const getUsersData = async () => {
   //simulating a real world fetch request from DB
   const response = await fetch("http://127.0.0.1:3000/api/users", {
     cache: "no-cache",
