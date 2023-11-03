@@ -85,7 +85,7 @@ const ContactItem = ({ key }: { key: number }) => {
 
   return (
     <div
-      key={}
+      key={key}
       className="bg-stone-800 cursor-pointer rounded-2xl p-4 flex items-center justify-between"
     >
       <div className="flex items-center space-x-4">
