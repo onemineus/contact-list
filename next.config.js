@@ -4,13 +4,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "100k-faces.glitch.me",
+        hostname: "randomuser.me",
         port: "",
-        pathname: "/random-image/**",
+        pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: "randomuser.me",
+        hostname: "www.testhouse.net",
         port: "",
         pathname: "/**",
       },
