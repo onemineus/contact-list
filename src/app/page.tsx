@@ -3,9 +3,9 @@ import ContactItem from "@/components/contactItem";
 import { ContactList } from "@/types/contacts";
 import Image from "next/image";
 
- const getUsersData = async () => {
+const getUsersData = async () => {
   //simulating a real world fetch request from DB
-  const response = await fetch("http://127.0.0.1:3000/api/users", {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_WEB_URL}/api/users`, {
     cache: "no-cache",
   });
   const data: ContactList = await response.json();
